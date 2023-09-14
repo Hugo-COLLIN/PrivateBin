@@ -12,5 +12,4 @@ jobs:
     - uses: php-actions/phpunit@v3
       with:
           version: 9.6.11
-          php_version: 7.4
     # ... then your own project steps ...
