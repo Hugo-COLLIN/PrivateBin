@@ -8,8 +8,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install PHP GD extension
+      run: |
+        sudo apt-get update 
+        sudo apt-get install php-xml
+        sudo apt-get install php-pdo
+        sudo apt-get install php-gd
+        sudo apt-get install php-dom
+        sudo apt-get install php-mbstring
+        sudo apt-get install php-curl 
+        sudo apt-get install libz-dev libzip-dev
+        sudo pecl install zlib zip
+        sudo apt-get install sqlite3
+        sudo apt-get install php-sqlite3
+        
+        
     - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpunit@v3
       with:
           version: 9.6.11
-    # ... then your own project steps ...
