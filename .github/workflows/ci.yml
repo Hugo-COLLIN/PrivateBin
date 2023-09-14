@@ -18,7 +18,7 @@ jobs:
         sudo apt-get install php-mbstring
         sudo apt-get install php-curl 
         sudo apt-get install libz-dev libzip-dev
-        sudo pecl install zlib zip
+        sudo apt-get install php-zip
         sudo apt-get install sqlite3
         sudo apt-get install php-sqlite3
         
