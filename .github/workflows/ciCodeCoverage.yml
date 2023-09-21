@@ -8,6 +8,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Debug - Show working directory and files
+      run: |
+        pwd
+        ls -la log
+      
     - name: Code Coverage Summary
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
