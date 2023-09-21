@@ -13,7 +13,7 @@ jobs:
     - uses: php-actions/phpunit@v3
       with:
           version: 9.6.11
-          php_extensions: gd
+          php_extensions: gd, xdebug
 
     - name: Debug - Show working directory and files
       run: |
