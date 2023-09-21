@@ -3,10 +3,10 @@
   <coverage>
     <include>
       <directory suffix=".php">./lib</directory>
-      <directory suffix=".php">./vendor</directory>
     </include>
     <exclude>
       <file>./lib/Data/AbstractData.php</file>
+      <directory suffix=".php">./vendor</directory>
     </exclude>
     <report>
       <clover outputFile="log/coverage-clover.xml"/>
