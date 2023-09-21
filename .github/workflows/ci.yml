@@ -14,4 +14,7 @@ jobs:
       with:
           version: 9.6.11
           php_extensions: gd
-    - uses: irongut/CodeCoverageSummary@v1.3.0
+    - name: Code Coverage Summary
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: coverage.cobertura.xml
