@@ -11,6 +11,7 @@
     <report>
       <clover outputFile="log/coverage-clover.xml"/>
       <html outputDirectory="log/php-coverage-report" lowUpperBound="50" highLowerBound="80"/>
+      <cobertura outputFile="coverage.cobertura.xml"/>
     </report>
   </coverage>
   <testsuite name="PrivateBin Test Suite">
