@@ -14,6 +14,8 @@ jobs:
       with:
           version: 9.6.11
           php_extensions: gd xdebug
+      env:
+          XDEBUG_MODE: coverage
 
     - name: Debug - Show working directory and files
       run: |
