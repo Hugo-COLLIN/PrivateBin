@@ -9,6 +9,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - uses: php-actions/composer@v6 # or alternative dependency management
+    - uses: php-actions/phpunit@v3
+      with:
+          version: 9.6.11
+          php_extensions: gd
+
     - name: Debug - Show working directory and files
       run: |
         pwd
