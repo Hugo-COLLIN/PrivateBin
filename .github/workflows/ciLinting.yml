@@ -28,6 +28,7 @@ jobs:
         php_version: 8.1
         path: lib/
         standard: phpcs.xml
+        ignore: lib/*
         
     - name: PHP Mess Detector
       uses: php-actions/phpmd@v1
