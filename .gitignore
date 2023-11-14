@@ -5,3 +5,6 @@ doc/*
 vendor
 log
 .phpunit.result.cache
+
+.idea
+*.iml
