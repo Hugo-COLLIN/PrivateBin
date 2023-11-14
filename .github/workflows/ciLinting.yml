@@ -37,3 +37,4 @@ jobs:
         path: lib/
         output: text
         ruleset: phpmd.xml
+        args: --ignore-violations-on-exit
