@@ -1,4 +1,4 @@
-name: CI
+name: CITests
 
 on: [push]
 
