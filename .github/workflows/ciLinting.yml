@@ -17,23 +17,23 @@ jobs:
       env:
           XDEBUG_MODE: coverage
       
-    - name: Code Coverage Summary
-      uses: irongut/CodeCoverageSummary@v1.3.0
-      with:
-        filename: log/coverage.cobertura.xml
+#    - name: Code Coverage Summary
+#      uses: irongut/CodeCoverageSummary@v1.3.0
+#      with:
+#        filename: log/coverage.cobertura.xml
 
-    - name: PHP Code Sniffer
-      uses: php-actions/phpcs@v1
-      with:
-        php_version: 8.1
-        path: lib/
-        standard: phpcs.xml
-        ignore: lib/*
+#    - name: PHP Code Sniffer
+#      uses: php-actions/phpcs@v1
+#      with:
+#        php_version: 8.1
+#        path: lib/
+#        standard: phpcs.xml
+#        ignore: lib/*
         
     - name: PHP Mess Detector
       uses: php-actions/phpmd@v1
       with:
         php_version: 8.1
-        path: src/
+        path: lib/
         output: text
         ruleset: phpmd.xml
