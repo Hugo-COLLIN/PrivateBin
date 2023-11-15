@@ -30,6 +30,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            sudo mkdir -p /var/www/html/PrivateBin/
             sudo mv /tmp/PrivateBin/* /var/www/html/PrivateBin/
             cd /var/www/html/PrivateBin/
             sudo composer install --ignore-platform-reqs
