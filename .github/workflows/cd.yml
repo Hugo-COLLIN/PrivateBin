@@ -1,6 +1,10 @@
 name: EC2 Deployment
 
 on:
+  workflow_run:
+    workflows: [ CITests, CICodeCoverage, CILinting, CIStan ]
+    types:
+      - completed
   push:
     branches:
       - main
