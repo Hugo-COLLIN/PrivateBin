@@ -13,15 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
+      - name: Copy files to the deployment server
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: |
-            sudo apt-get update
-            sudo apt-get install -y apache2
-            sudo rm -rf /var/www/html/PrivateBin
-            sudo cp -r ./ /var/www/html/PrivateBin
-            sudo systemctl restart apache2
+          overwrite: true
+          source: "composer.json,composer.lock,index.php,makefile,manifest.json,bin/,cfg/,css/,i18n/,img/,js/,lib/,tpl/,tst/"
+          target: '/var/www/html/PrivateBin/'
+
+      - name: Install dependencies
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script:
+            cd /var/www/html ;
+            composer install --ignore-platform-reqs
