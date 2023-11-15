@@ -228,7 +228,7 @@ class Controller
                     Filter::formatHumanReadableSize($sizelimit)
                 )
             );
-            return;
+            return $this->_json;
         }
 
         // The user posts a comment.
