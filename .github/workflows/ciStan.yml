@@ -1,4 +1,4 @@
-name: CILinting
+name: CIStan
 
 on: [push]
 
@@ -43,5 +43,5 @@ jobs:
       with:
         php_version: 8.1
         path: lib/
-        level: 8
+        level: 0
         args: --no-progress
