@@ -2,7 +2,7 @@ name: EC2 Deployment
 
 on:
   workflow_run:
-    workflows: [ CI ]
+    workflows: ["CI"]
     types:
       - completed
   push:
@@ -12,6 +12,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout code
