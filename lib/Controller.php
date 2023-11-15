@@ -205,8 +205,7 @@ class Controller
         try {
             TrafficLimiter::canPass();
         } catch (Exception $e) {
-            $this->_return_message(1, $e->getMessage());
-            return $this->_json;
+            return $this->_return_message(1, $e->getMessage());
         }
 
         $data      = $this->_request->getData();
@@ -215,20 +214,18 @@ class Controller
             array_key_exists('parentid', $data) &&
             !empty($data['parentid']);
         if (!FormatV2::isValid($data, $isComment)) {
-            $this->_return_message(1, I18n::_('Invalid data.'));
-            return $this->_json;
+            return $this->_return_message(1, I18n::_('Invalid data.'));
         }
         $sizelimit = $this->_conf->getKey('sizelimit');
         // Ensure content is not too big.
         if (strlen($data['ct']) > $sizelimit) {
-            $this->_return_message(
+            return $this->_return_message(
                 1,
                 I18n::_(
                     'Paste is limited to %s of encrypted data.',
                     Filter::formatHumanReadableSize($sizelimit)
                 )
             );
-            return $this->_json;
         }
 
         // The user posts a comment.
@@ -240,14 +237,11 @@ class Controller
                     $comment->setData($data);
                     $comment->store();
                 } catch (Exception $e) {
-                    $this->_return_message(1, $e->getMessage());
-                    return $this->_json;
+                    return $this->_return_message(1, $e->getMessage());
                 }
-                $this->_return_message(0, $comment->getId());
-                return $this->_json;
+                return $this->_return_message(0, $comment->getId());
             } else {
-                $this->_return_message(1, I18n::_('Invalid data.'));
-                return $this->_json;
+                return $this->_return_message(1, I18n::_('Invalid data.'));
             }
         }
         // The user posts a standard paste.
@@ -258,11 +252,9 @@ class Controller
                 $paste->setData($data);
                 $paste->store();
             } catch (Exception $e) {
-                $this->_return_message(1, $e->getMessage());
-                return $this->_json;
+                return $this->_return_message(1, $e->getMessage());
             }
-            $this->_return_message(0, $paste->getId(), array('deletetoken' => $paste->getDeleteToken()));
-            return $this->_json;
+            return $this->_return_message(0, $paste->getId(), array('deletetoken' => $paste->getDeleteToken()));
         }
     }
 
