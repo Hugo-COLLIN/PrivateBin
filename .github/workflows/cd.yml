@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Copy files to the deployment server
+      - name: Copy files to the temporary directory
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
@@ -21,14 +21,16 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           overwrite: true
           source: "composer.json,composer.lock,index.php,makefile,manifest.json,bin/,cfg/,css/,i18n/,img/,js/,lib/,tpl/,tst/"
-          target: '/var/www/html/PrivateBin/'
+          target: '/tmp/PrivateBin/'
 
-      - name: Install dependencies
+      - name: Move files to the target directory and install dependencies
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script:
-            cd /var/www/html ;
-            composer install --ignore-platform-reqs
+          script: |
+            sudo mv /tmp/PrivateBin/* /var/www/html/PrivateBin/
+            cd /var/www/html/PrivateBin/
+            sudo composer install --ignore-platform-reqs
+      
