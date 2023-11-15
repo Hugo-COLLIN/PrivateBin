@@ -206,7 +206,7 @@ class Controller
             TrafficLimiter::canPass();
         } catch (Exception $e) {
             $this->_return_message(1, $e->getMessage());
-            return;
+            return $this->_json;
         }
 
         $data      = $this->_request->getData();
@@ -216,7 +216,7 @@ class Controller
             !empty($data['parentid']);
         if (!FormatV2::isValid($data, $isComment)) {
             $this->_return_message(1, I18n::_('Invalid data.'));
-            return;
+            return $this->_json;
         }
         $sizelimit = $this->_conf->getKey('sizelimit');
         // Ensure content is not too big.
@@ -241,11 +241,13 @@ class Controller
                     $comment->store();
                 } catch (Exception $e) {
                     $this->_return_message(1, $e->getMessage());
-                    return;
+                    return $this->_json;
                 }
-                return $this->_return_message(0, $comment->getId());
+                $this->_return_message(0, $comment->getId());
+                return $this->_json;
             } else {
-                return $this->_return_message(1, I18n::_('Invalid data.'));
+                $this->_return_message(1, I18n::_('Invalid data.'));
+                return $this->_json;
             }
         }
         // The user posts a standard paste.
@@ -256,9 +258,11 @@ class Controller
                 $paste->setData($data);
                 $paste->store();
             } catch (Exception $e) {
-                return $this->_return_message(1, $e->getMessage());
+                $this->_return_message(1, $e->getMessage());
+                return $this->_json;
             }
             $this->_return_message(0, $paste->getId(), array('deletetoken' => $paste->getDeleteToken()));
+            return $this->_json;
         }
     }
 
