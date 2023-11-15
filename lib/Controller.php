@@ -243,9 +243,9 @@ class Controller
                     $this->_return_message(1, $e->getMessage());
                     return;
                 }
-                $this->_return_message(0, $comment->getId());
+                return $this->_return_message(0, $comment->getId());
             } else {
-                $this->_return_message(1, I18n::_('Invalid data.'));
+                return $this->_return_message(1, I18n::_('Invalid data.'));
             }
         }
         // The user posts a standard paste.
@@ -482,5 +482,6 @@ class Controller
         }
         $result += $other;
         $this->_json = Json::encode($result);
+        return $this->_json;
     }
 }
